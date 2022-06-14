@@ -1,5 +1,8 @@
-## Travors tractors spare parts emporium
+# Travors tractors spare parts emporium
 Trevor being a tracktor enthusiast buys and sells spare parts for tractors
+
+## Demo
+Run `docker compose up -d` followed by `docker exec -it trevors-tracktors bash` to access terminal with php access. `./test.php` will run a demo that builds some different baskets and outputs the contents.
 
 ## Task
 Create a cart engine that will auto apply discounts based on a set of rules
