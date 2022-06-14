@@ -1,6 +1,6 @@
 <?php
 
-namespace Kata;
+namespace Kata\Item;
 
 class DiscountItem implements CartItem
 {
@@ -14,12 +14,17 @@ class DiscountItem implements CartItem
         string $name,
         int $price
     ): self {
-        return new self($name,$price);
+        return new self($name . ' (discounted)',$price);
+    }
+
+    public function id(): string
+    {
+        return $this->name;
     }
 
     public function name(): string
     {
-        return $this->name . ' (discounted)';
+        return $this->name;
     }
 
     public function price(): int
@@ -29,6 +34,6 @@ class DiscountItem implements CartItem
 
     public function equals(CartItem $other): bool
     {
-        return $this->name() === $other->name();
+        return $this->id() === $other->id();
     }
 }

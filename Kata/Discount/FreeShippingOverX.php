@@ -4,6 +4,7 @@ namespace Kata\Discount;
 
 use Kata\Cart;
 use Kata\ProductCatalog;
+use Kata\Item\DiscountItem;
 
 class FreeShippingOverX implements Discount
 {
@@ -30,6 +31,10 @@ class FreeShippingOverX implements Discount
 
     public function apply(Cart $cart): void
     {
-        $cart->remove(ProductCatalog::get('Shipping'));
+        $shippingProduct = ProductCatalog::get('Shipping');
+        $cart->add(DiscountItem::create(
+            $shippingProduct->name(),
+            -$shippingProduct->price()
+        ));
     }
 }

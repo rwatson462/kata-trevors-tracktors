@@ -15,13 +15,13 @@ class Receipt
         $cartContents = array_reduce(
             $orderItems,
             function($carry, $item) {
-                if(isset($carry[$item->name()])) {
-                    $carry[$item->name()]['qty'] += 1;
-                    $carry[$item->name()]['price'] += $item->price();
+                if(isset($carry[$item->id()])) {
+                    $carry[$item->id()]['qty'] += 1;
+                    $carry[$item->id()]['price'] += $item->price();
                     return $carry;
                 }
 
-                $carry[$item->name()] = [
+                $carry[$item->id()] = [
                     'name' => $item->name(),
                     'qty' => 1,
                     'price' => $item->price()

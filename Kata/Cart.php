@@ -2,6 +2,8 @@
 
 namespace Kata;
 
+use Kata\Item\CartItem;
+
 class Cart
 {
     protected array $cartItems = [];

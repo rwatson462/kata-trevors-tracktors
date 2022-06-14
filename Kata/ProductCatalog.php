@@ -2,6 +2,8 @@
 
 namespace Kata;
 
+use Kata\Item\Product;
+
 class ProductCatalog
 {
     public static function get(string $productName): Product

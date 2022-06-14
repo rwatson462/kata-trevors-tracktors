@@ -1,6 +1,6 @@
 <?php
 
-namespace Kata;
+namespace Kata\Item;
 
 class Product implements CartItem
 {
@@ -17,6 +17,12 @@ class Product implements CartItem
         int $vatPercent
     ): self {
         return new self($name,$price,$vatPercent);
+    }
+
+    public function id(): string
+    {
+        // Temporary measure as these products don't have unique identifiers
+        return $this->name;
     }
 
     public function name(): string
@@ -37,6 +43,6 @@ class Product implements CartItem
 
     public function equals(CartItem $other): bool
     {
-        return $this->name() === $other->name();
+        return $this->id() === $other->id();
     }
 }
