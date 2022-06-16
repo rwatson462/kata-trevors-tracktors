@@ -8,7 +8,7 @@ class Cart
 {
     protected array $cartItems = [];
 
-    public static function create(array $products): self
+    public static function create(array $products = []): self
     {
         // make sure we only have a list of Product objects
         $products = array_filter(

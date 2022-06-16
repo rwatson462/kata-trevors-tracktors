@@ -6,8 +6,7 @@ class Order
 {
     protected function __construct(
         private array $lines
-    )
-    {
+    ) {
     }
 
     public static function createFromCart(Cart $cart): self
