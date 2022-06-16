@@ -2,6 +2,8 @@
 Trevor being a tracktor enthusiast buys and sells spare parts for tractors
 
 ## Demo
+To run unit tests only, run `docker compose run test`
+
 Run `docker compose up -d` followed by `docker exec -it trevors-tracktors bash` to access terminal with php access. `./test.php` will run a demo that builds some different baskets and outputs the contents.
 
 ## Task
