@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Kata\\": "Kata"
+        }
+    },
+    "require": {
+        "phpunit/phpunit": "^9"
+    }
+}

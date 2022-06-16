@@ -3,7 +3,16 @@ services:
   php:
     image: php:8.1
     volumes:
-      - ./:/var/www
+      - ./src:/var/www
     working_dir: /var/www
     tty: true
     container_name: trevors-tracktors
+  test:
+    build:
+      context: .
+      dockerfile: TestSuite.Dockerfile
+    container_name: trevors-testers
+    volumes:
+      - ./test:/var/www/test
+      - ./src/Kata:/var/www/Kata
+    command: ["phpunit", "--testdox", "test"]
