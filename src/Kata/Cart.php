@@ -8,6 +8,8 @@ class Cart
 {
     protected array $cartItems = [];
 
+    protected function __construct() {}
+
     public static function create(array $products = []): self
     {
         // make sure we only have a list of Product objects

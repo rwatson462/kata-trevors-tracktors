@@ -6,6 +6,8 @@ use Kata\Item\Product;
 
 class ProductCatalog
 {
+    protected function __construct() {}
+
     public static function get(string $productName): Product
     {
         return match($productName) {
