@@ -4,7 +4,7 @@ namespace Kata;
 
 use InvalidArgumentException;
 
-class VatRate
+class TaxRate
 {
     private static array $rates = [
         'free' => 0,

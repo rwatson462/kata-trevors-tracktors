@@ -3,7 +3,7 @@
 namespace Kata;
 
 use Kata\Product\Product;
-use Kata\VatRate;
+use Kata\TaxRate;
 
 class ProductCatalog
 {
@@ -22,7 +22,7 @@ class ProductCatalog
     {
         foreach(self::$products as $product) {
             if($product[0] === $productName) {
-                $product[2] = VatRate::get($product[2]);
+                $product[2] = TaxRate::get($product[2]);
                 return Product::create(...$product);
             }
         }

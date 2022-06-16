@@ -1,17 +1,17 @@
 <?php
 
-use Kata\VatRate;
+use Kata\TaxRate;
 use Kata\Price;
 use Kata\Product\Product;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
 {
-    private VatRate $vatRate;
+    private TaxRate $vatRate;
 
     public function setUp(): void
     {
-        $this->vatRate = $this->createMock(VatRate::class);
+        $this->vatRate = $this->createMock(TaxRate::class);
         $this->vatRate->method('rate')->willReturn(100);
     }
 

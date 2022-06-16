@@ -2,21 +2,21 @@
 
 namespace Kata\Product;
 
-use Kata\VatRate;
+use Kata\TaxRate;
 
 class Product implements CartProduct
 {
     protected function __construct(
         private string $name,
         private int $price,
-        private VatRate $vatRate
+        private TaxRate $vatRate
     ) {
     }
 
     public static function create(
         string $name,
         int $price,
-        VatRate $vatRate
+        TaxRate $vatRate
     ): self {
         return new self($name,$price,$vatRate);
     }
