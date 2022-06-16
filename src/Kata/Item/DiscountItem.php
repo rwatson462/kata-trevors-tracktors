@@ -6,15 +6,17 @@ class DiscountItem implements CartItem
 {
     protected function __construct(
         private string $name,
-        private int $price
+        private int $price,
+        private int $vatPercent
     ) {
     }
 
     public static function create(
         string $name,
-        int $price
+        int $price,
+        int $vatPercent
     ): self {
-        return new self($name . ' (discounted)',$price);
+        return new self($name . ' (discounted)', $price, $vatPercent);
     }
 
     public function id(): string

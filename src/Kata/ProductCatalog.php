@@ -8,38 +8,23 @@ class ProductCatalog
 {
     protected function __construct() {}
 
+    private static array $products = [
+        ['Front wheels', 10999, 1500],
+        ['Rear wheels', 52703, 1500],
+        ['Second hand stank seat', 39599, 1500],
+        ['Bouncing Balls Gear Box protector', 4999, 0],
+        ['Air freshner', 0, 0],
+        ['Shipping', 15000, 0],
+    ];
+
     public static function get(string $productName): Product
     {
-        return match($productName) {
-            'Front wheels' => Product::create(
-                name: 'Front wheels',
-                price: 10999,
-                vatPercent: 1500
-            ),
-            'Rear wheels' => Product::create(
-                name: 'Rear wheels',
-                price: 52703,
-                vatPercent: 1500
-            ),
-            'Second hand stank seat' => Product::create(
-                name: 'Second hand stank seat',
-                price: 39599,
-                vatPercent: 1500
-            ),
-            'Bouncing Balls Gear Box protector' => Product::create(
-                name: 'Bouncing Balls Gear Box protector',
-                price: 4999,
-                vatPercent: 0),
-            'Shipping' => Product::create(
-                name: 'Shipping',
-                price: 15000,
-                vatPercent: 0
-            ),
-            'Air freshner' => Product::create(
-                name: 'Air freshner',
-                price: 0,
-                vatPercent: 0
-            ),
-        };
+        foreach(self::$products as $product) {
+            if($product[0] === $productName) {
+                return Product::create(...$product);
+            }
+        }
+
+        throw new \InvalidArgumentException("No product found for $productName");
     }
 }

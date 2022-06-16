@@ -9,7 +9,7 @@ class ProductCatalogTest extends TestCase
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
-        $cart = new ProductCatalog;
+        new ProductCatalog;
     }
 
     public function testCanGetFrontWheelsProduct(): void
@@ -18,5 +18,11 @@ class ProductCatalogTest extends TestCase
         $frontWheels = ProductCatalog::get($productName);
         $this->assertInstanceOf(CartItem::class, $frontWheels);
         $this->assertEquals($productName, $frontWheels->name());
+    }
+
+    public function testInvalidProductThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        ProductCatalog::get('invalid-product');
     }
 }

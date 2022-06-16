@@ -8,6 +8,6 @@ class DiscountCheckerTest extends TestCase
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
-        $cart = new DiscountChecker;
+        new DiscountChecker;
     }
 }
