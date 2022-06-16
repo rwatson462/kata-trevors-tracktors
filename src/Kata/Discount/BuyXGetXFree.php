@@ -3,17 +3,17 @@
 namespace Kata\Discount;
 
 use Kata\Cart;
-use Kata\Item\CartItem;
-use Kata\Item\FreeItem;
+use Kata\Product\CartProduct;
+use Kata\Product\FreeProduct;
 use Kata\Product;
 use Kata\ProductCatalog;
 
 class BuyXGetXFree implements Discount
 {
     protected function __construct(
-        private CartItem $qualifyingItem,
+        private CartProduct $qualifyingItem,
         private int $qualifyingQuantity,
-        private CartItem $freeItem,
+        private CartProduct $freeItem,
         private int $freeQuantity
     ) {
     }
@@ -27,8 +27,9 @@ class BuyXGetXFree implements Discount
     {
         $product = ProductCatalog::get($freeItemStr);
 
-        $freeItem = FreeItem::create(
+        $freeItem = FreeProduct::create(
             $product->name(),
+            0,
             0
         );
         

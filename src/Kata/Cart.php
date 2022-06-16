@@ -2,7 +2,8 @@
 
 namespace Kata;
 
-use Kata\Item\CartItem;
+use Kata\Product\CartProduct;
+use InvalidArgumentException;
 
 class Cart
 {
@@ -12,15 +13,12 @@ class Cart
 
     public static function create(array $products = []): self
     {
-        // make sure we only have a list of Product objects
-        $products = array_filter(
-            $products,
-            fn($product) => $product instanceof CartItem
-        );
-
         $cart = new self;
 
         foreach($products as $product) {
+            if(!$product instanceof CartProduct) {
+                throw new InvalidArgumentException('Invalid product adding to cart: ' . $product::class);
+            }
             $cart->add($product);
         }
 
@@ -32,14 +30,14 @@ class Cart
         return $this->cartItems;
     }
 
-    public function add(CartItem $product, int $quantity = 1): void
+    public function add(CartProduct $product, int $quantity = 1): void
     {
         while($quantity-- > 0) {
             $this->cartItems[] = $product;
         }
     }
     
-    public function remove(CartItem $product, int $quantity = 1): void
+    public function remove(CartProduct $product, int $quantity = 1): void
     {
         while($quantity-- > 0) {
             foreach($this->cartItems as $key => $cartItem) {

@@ -2,7 +2,7 @@
 
 namespace Kata;
 
-use Kata\Item\Product;
+use Kata\Product\Product;
 
 class ProductCatalog
 {

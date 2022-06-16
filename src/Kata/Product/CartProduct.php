@@ -1,8 +1,8 @@
 <?php
 
-namespace Kata\Item;
+namespace Kata\Product;
 
-interface CartItem
+interface CartProduct
 {
     public function id(): string;
     
@@ -10,5 +10,5 @@ interface CartItem
 
     public function price(): int;
 
-    public function equals(CartItem $other): bool;
+    public function equals(CartProduct $other): bool;
 }

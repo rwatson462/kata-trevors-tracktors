@@ -1,8 +1,8 @@
 <?php
 
-namespace Kata\Item;
+namespace Kata\Product;
 
-class FreeItem extends DiscountItem
+class FreeProduct extends DiscountProduct
 {
     public static function create(
         string $name,

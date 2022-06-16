@@ -1,6 +1,6 @@
 <?php
 
-use Kata\Item\Product;
+use Kata\Product\Product;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase

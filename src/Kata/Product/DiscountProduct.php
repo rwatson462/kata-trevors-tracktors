@@ -1,8 +1,8 @@
 <?php
 
-namespace Kata\Item;
+namespace Kata\Product;
 
-class Product implements CartItem
+class DiscountProduct implements CartProduct
 {
     protected function __construct(
         private string $name,
@@ -16,12 +16,11 @@ class Product implements CartItem
         int $price,
         int $vatPercent
     ): self {
-        return new self($name,$price,$vatPercent);
+        return new self($name . ' (discounted)', $price, $vatPercent);
     }
 
     public function id(): string
     {
-        // Temporary measure as these products don't have unique identifiers
         return $this->name;
     }
 
@@ -32,16 +31,10 @@ class Product implements CartItem
 
     public function price(): int
     {
-        return $this->price + $this->vat();
+        return $this->price;
     }
 
-    public function vat(): int
-    {
-        // divide by 10000 to account for pence in the price
-        return round($this->price * $this->vatPercent / 10000);
-    }
-
-    public function equals(CartItem $other): bool
+    public function equals(CartProduct $other): bool
     {
         return $this->id() === $other->id();
     }

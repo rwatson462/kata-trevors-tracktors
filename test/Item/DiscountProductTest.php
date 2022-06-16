@@ -1,25 +1,25 @@
 <?php
 
-use Kata\Item\DiscountItem;
+use Kata\Product\DiscountProduct;
 use PHPUnit\Framework\TestCase;
 
-class DiscountItemTest extends TestCase
+class DiscountProductTest extends TestCase
 {
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
-        new DiscountItem;
+        new DiscountProduct;
     }
 
     public function testCanInstantiate(): void
     {
-        $product = DiscountItem::create('prod-name', 1000, 0);
-        $this->assertInstanceOf(DiscountItem::class, $product);
+        $product = DiscountProduct::create('prod-name', 1000, 0);
+        $this->assertInstanceOf(DiscountProduct::class, $product);
     }
 
     public function testPriceIsCorrect(): void
     {
-        $product = DiscountItem::create('prod-name', 1000, 0);
+        $product = DiscountProduct::create('prod-name', 1000, 0);
         $this->assertEquals(1000, $product->price());
     }
 }
