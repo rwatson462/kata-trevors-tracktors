@@ -3,6 +3,7 @@
 namespace Kata\Util;
 
 use Kata\Order;
+use Kata\Price;
 
 class Receipt
 {
@@ -37,13 +38,14 @@ class Receipt
                 . ' x '
                 . str_pad($content['qty'], 3)
                 . ' '
-                . Currency::format($content['price']),
+                . PriceFormatter::format($content['price']),
             $cartContents
         );
         sort($cartContents);
 
         $cartContents[] = str_repeat('=', 60);
-        $cartContents[] = str_pad('Order total', 47) . Currency::format($order->total());
+        $cartContents[] = str_pad('Order total', 47) 
+            . PriceFormatter::format($order->total());
         
         echo implode("\n", $cartContents) . "\n";
     }

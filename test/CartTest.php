@@ -1,12 +1,20 @@
 <?php
 
 use Kata\Cart;
+use Kata\VatRate;
 use Kata\Product\Product;
 use PHPUnit\Framework\TestCase;
-use InvalidArgumentException;
 
 class CartTest extends TestCase
 {
+    private VatRate $vatRate;
+
+    public function setUp(): void
+    {
+        $this->vatRate = $this->createMock(VatRate::class);
+        $this->vatRate->method('rate')->willReturn(100);
+    }
+
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
@@ -21,7 +29,7 @@ class CartTest extends TestCase
 
     public function testCanInstantiateWithProducts(): void
     {
-        $product = Product::create('test-product', 1000, 100);
+        $product = Product::create('test-product', 1000, $this->vatRate);
         $cart = Cart::create([$product]);
         $this->assertInstanceOf(Cart::class, $cart);
     }
@@ -37,7 +45,7 @@ class CartTest extends TestCase
 
     public function testCanAddProductToCart(): void
     {
-        $product = Product::create('test-product', 1000, 100);
+        $product = Product::create('test-product', 1000, $this->vatRate);
         $cart = Cart::create();
 
         $cart->add($product);
@@ -47,7 +55,7 @@ class CartTest extends TestCase
 
     public function testCanRemoveProductFromCart(): void
     {
-        $product = Product::Create('test-product', 1000, 100);
+        $product = Product::Create('test-product', 1000, $this->vatRate);
         $cart = Cart::create([$product]);
 
         $this->assertContains($product, $cart->items());

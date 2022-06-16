@@ -2,21 +2,23 @@
 
 namespace Kata\Product;
 
+use Kata\VatRate;
+
 class Product implements CartProduct
 {
     protected function __construct(
         private string $name,
         private int $price,
-        private int $vatPercent
+        private VatRate $vatRate
     ) {
     }
 
     public static function create(
         string $name,
         int $price,
-        int $vatPercent
+        VatRate $vatRate
     ): self {
-        return new self($name,$price,$vatPercent);
+        return new self($name,$price,$vatRate);
     }
 
     public function id(): string
@@ -37,8 +39,12 @@ class Product implements CartProduct
 
     public function vat(): int
     {
+        if(!isset($this->vatRate)) {
+            return 0;
+        }
+
         // divide by 10000 to account for pence in the price
-        return round($this->price * $this->vatPercent / 10000);
+        return round($this->price * $this->vatRate->rate() / 10000);
     }
 
     public function equals(CartProduct $other): bool

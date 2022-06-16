@@ -1,19 +1,19 @@
 <?php
 
-use Kata\Util\Currency;
+use Kata\Util\PriceFormatter;
 use PHPUnit\Framework\TestCase;
 
-class CurrencyTest extends TestCase
+class PriceFormatterTest extends TestCase
 {
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
-        new Currency;
+        new PriceFormatter;
     }
 
     public function testFormatReturnsCorrectValue(): void
     {
-        $result = Currency::format(1000);
+        $result = PriceFormatter::format(1000);
         $this->assertEquals('£10.00', $result);
     }
 }

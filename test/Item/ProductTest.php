@@ -1,10 +1,20 @@
 <?php
 
+use Kata\VatRate;
+use Kata\Price;
 use Kata\Product\Product;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
 {
+    private VatRate $vatRate;
+
+    public function setUp(): void
+    {
+        $this->vatRate = $this->createMock(VatRate::class);
+        $this->vatRate->method('rate')->willReturn(100);
+    }
+
     public function testCannotInstantiateWithNew(): void
     {
         $this->expectException(Throwable::class);
@@ -15,12 +25,11 @@ class ProductTest extends TestCase
     {
         $productName = 'prod-name';
         $price = 10000;
-        $vatRate = 1000;
-        $amountOfVat = $price * $vatRate / 10000;
+        $amountOfVat = 100;
         $priceInclVat = $price + $amountOfVat;
 
         $product = Product::create(
-            $productName, $price, $vatRate
+            $productName, $price, $this->vatRate
         );
 
         $this->assertInstanceOf(Product::class, $product);
@@ -29,23 +38,17 @@ class ProductTest extends TestCase
         $this->assertEquals($priceInclVat, $product->price());
     }
 
-    public function testVatReturnsCorrectAmount(): void
-    {
-        $product = Product::create('prod-name', 10000, 100);
-        $this->assertEquals(100, $product->vat());
-    }
-
     public function testPriceCorrectlyAddsVat(): void
     {
-        $product = Product::create('prod-name', 10000, 100);
+        $product = Product::create('prod-name', 10000, $this->vatRate);
         $this->assertEquals(10100, $product->price());
     }
 
     public function testEqualsMethodIdentifiesSameProduct(): void
     {
         $productName = 'prod-name';
-        $product1 = Product::create($productName, 10000, 100);
-        $product2 = Product::create($productName, 10000, 100);
+        $product1 = Product::create($productName, 10000, $this->vatRate);
+        $product2 = Product::create($productName, 10000, $this->vatRate);
 
         $this->assertTrue($product1->equals($product2));
         $this->assertTrue($product2->equals($product1));
@@ -53,8 +56,8 @@ class ProductTest extends TestCase
 
     public function testEqualsMethodIdentifiesDifferentProducts(): void
     {
-        $product1 = Product::create('prod-name-1', 10000, 100);
-        $product2 = Product::Create('prod-name-2', 10000, 100);
+        $product1 = Product::create('prod-name-1', 10000, $this->vatRate);
+        $product2 = Product::Create('prod-name-2', 10000, $this->vatRate);
 
         $this->assertFalse($product1->equals($product2));
         $this->assertFalse($product2->equals($product1));
